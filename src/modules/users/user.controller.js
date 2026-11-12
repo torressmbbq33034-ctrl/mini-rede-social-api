@@ -50,7 +50,7 @@ async function createUserController(req, res) {
     const user = await userService.create(name, email, password);
 
     if (!user) {
-      return res.status(400).json({
+      return res.status(401).json({
         message: "Nome, email ou senha inválidos",
       });
     }
