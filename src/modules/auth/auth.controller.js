@@ -10,6 +10,11 @@ async function login(req, res) {
   }
 
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({
+      message: "email e passoword são obrigatorios",
+    });
+  }
 
   try {
     const result = await authService.login(email, password);
