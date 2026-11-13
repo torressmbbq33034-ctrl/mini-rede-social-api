@@ -98,12 +98,24 @@ function updateUserByIdController(req, res) {
 
   const { name, email } = req.body;
 
+  if (!name || !email) {
+    return res.status(400).json({
+      message: "Nome e email são obrigatorios",
+    });
+  }
+
+  if (!name.trim()) {
+    return res.status(400).json({
+      message: "Nome não pode estar em branco",
+    });
+  }
+
   try {
     const user = userService.update(id, name, email);
 
     if (!user) {
-      return res.status(400).json({
-        message: "Usuário não encontrado ou email inválido",
+      return res.status(404).json({
+        message: "Usuário não encontrado",
       });
     }
 
